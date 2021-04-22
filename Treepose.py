@@ -38,10 +38,10 @@ with mp_pose.Pose(
   mp_drawing.draw_landmarks(
       annotated_image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,mp_drawing.DrawingSpec(color=(0, 255, 255)))
   
-  cv2.imwrite("Frame1.png",annotated_image)
-  while(1):
-    cv2.imshow("Frame",annotated_image)
-    cv2.waitKey(1)
+  #cv2.imwrite("Frame1.png",annotated_image)
+  #while(1):
+   #cv2.imshow("Frame",annotated_image)
+    #cv2.waitKey(1)
 
 '''
 # For webcam input:

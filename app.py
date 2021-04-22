@@ -5,6 +5,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 from media import trainerDict
 from Treepose import trainerDict_tpose
+from warrior import trainerDict_warrior
 
 app = Flask(__name__)
 
@@ -158,6 +159,7 @@ def index():
 
 
 def gen_frames_tpose(): 
+    trainerDict=trainerDict_tpose
     while True:
         success, image = camera.read() 
         if not success:
@@ -173,25 +175,34 @@ def gen_frames_tpose():
                     for landmark in results.pose_landmarks.landmark:
                         cx,cy=int(landmark.x*w),int(landmark.y*h)
                         print(idp)
-                        if idp==24:
-                            if abs(trainerDict[idp][0]-landmark.x)<0.1 and abs(trainerDict[idp][1]-landmark.y)<0.1:
+                        
+                        if idp==30:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.5 and abs(trainerDict[idp][1]-landmark.y)<0.5:
                                 cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
-                                print("Hips Correct")
+                                print("Foot Correct")
                             else:
-                                cv2.putText(image,"Correct your Hips",(10,10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
-                        elif idp==12:
-                            if abs(trainerDict[idp][0]-landmark.x)<0.1 and abs(trainerDict[idp][1]-landmark.y)<0.1:
+                                cv2.putText(image,"Correct your Right Foot",(10,10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==29:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.5 and abs(trainerDict[idp][1]-landmark.y)<0.5:
                                 cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
-                                print("Shoulders Correct")
+                                print("Another Foot Correct")
                             else:
-                                cv2.putText(image,"Correct your Shoulders",(10,30),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                                cv2.putText(image,"Correct your Left Foot",(10,30),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
                         elif idp==14:
-                            if abs(trainerDict[idp][0]-landmark.x)<0.1 and abs(trainerDict[idp][1]-landmark.y)<0.1:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.5 and abs(trainerDict[idp][1]-landmark.y)<0.5:
                                 cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
-                                print("Elbow Correct")
+                                print("Left Elbow Correct")
                             else:
-                                cv2.putText(image,"Correct your Elbow",(10,50),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
-
+                                cv2.putText(image,"Correct your Left Elbow",(10,50),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==13:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.3 and abs(trainerDict[idp][1]-landmark.y)<0.3:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Right Elbow Correct")
+                            else:
+                                cv2.putText(image,"Correct your Right Elbow",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        
+                        
+                        
                         idp=idp+1
                 annotated_image = image.copy()
                 mp_drawing.draw_landmarks(
@@ -214,5 +225,112 @@ def tpose():
     return render_template('tpose.html')
 
 
+####################
+#Warrior Pose
+####################
+
+def gen_frames_warrior(): 
+    trainerDict=trainerDict_warrior
+    while True:
+        success, image = camera.read() 
+        if not success:
+            break
+        else:
+            with mp_pose.Pose(static_image_mode=True, min_detection_confidence=0.5) as pose:       
+                image_height, image_width, _ = image.shape
+                
+                results = pose.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+                h,w,c=image.shape
+                if(results.pose_landmarks):
+                    idp=0
+                    for landmark in results.pose_landmarks.landmark:
+                        cx,cy=int(landmark.x*w),int(landmark.y*h)
+                        print(idp)
+                        
+                        if idp==30:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Foot Correct")
+                            else:
+                                cv2.putText(image,"Correct your Right Foot",(10,10),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==29:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Another Foot Correct")
+                            else:
+                                cv2.putText(image,"Correct your Left Foot",(10,30),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==14:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Left Elbow Correct")
+                            else:
+                                cv2.putText(image,"Correct your Left Elbow",(10,50),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==13:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Right Elbow Correct")
+                            else:
+                                cv2.putText(image,"Correct your Right Elbow",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==16:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Left Hand Correct")
+                            else:
+                                cv2.putText(image,"Correct your Left Hand",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==15:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Right Hand Correct")
+                            else:
+                                cv2.putText(image,"Correct your Right Hand",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==11 or idp ==12:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Shoulder Correct")
+                            else:
+                                cv2.putText(image,"Correct your Shoulders",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+
+                        elif idp==26:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Left Knee Correct")
+                            else:
+                                cv2.putText(image,"Correct your Left Knee",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        elif idp==25:
+                            if abs(trainerDict[idp][0]-landmark.x)<0.2 and abs(trainerDict[idp][1]-landmark.y)<0.2:
+                                cv2.circle(image,(cx,cy),25,(255,0,255),cv2.FILLED)
+                                print("Right Knee Correct")
+                            else:
+                                cv2.putText(image,"Correct your Right Knee",(10,70),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255, 0, 0),1,cv2.LINE_AA)
+                        
+                        idp=idp+1
+                annotated_image = image.copy()
+                mp_drawing.draw_landmarks(
+                    annotated_image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,mp_drawing.DrawingSpec(color=(0, 255, 255)))
+                ret, jpeg = cv2.imencode('.jpg', annotated_image)
+                frame=jpeg.tobytes()
+                yield (b'--frame\r\n'
+                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+
+
+@app.route('/video_feed_warrior')
+def video_feed_warrior():
+    #Video streaming route. Put this in the src attribute of an img tag
+    return Response(gen_frames_warrior(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/warrior')
+def warrior():
+    """Video streaming home page."""
+    return render_template('warrior.html')
+
+
+#########
+#Index
+#########
+@app.route('/')
+def homepage():
+    """Video streaming home page."""
+    return render_template('index.html')
 if __name__ == '__main__':
     app.run(debug=True)

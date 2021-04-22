@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>Yoga Pose</title>
+	 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	 
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- MAIN CSS -->
+	 
+	 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+	 <link rel="stylesheet" href="style.css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    width:100%;
+    height:100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(https://i.ibb.co/1RfQ4jK/background1.jpg);
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 2%;
+    box-sizing: border-box;
+}
+.navbar{
+    height: 12%;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    width:100px;
+    cursor: pointer;
+}
+.menu-icon{
+    width: 30px;
+    cursor: pointer;
+    margin: 40px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 60px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color :#fff;
+    font-size: 15;
+}
+
+.row{
+    display: flex;
+    height: 88%;
+    align-items: center;
+}
+
+.col{
+    flex-basis: 50%;
+}
+
+h1{
+    color: #fff;
+    font-size:100px;
+
+}
+
+p{
+    color: #fff;
+    font-size: 11px;
+    line-height: 15px;
+}
+
+.card{
+    width :200px;
+    height :230px;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.1;
+}
+.card1{
+    background-image: url(https://thumbs.dreamstime.com/b/child-doing-yoga-tree-pose-cartoon-style-illustration-isolated-white-background-118314731.jpg);
+}
+.card2{
+    background-image: url(https://i.ibb.co/MCBjYCJ/plank.png);
+}
+.card3{
+    background-image: url(https://thumbs.dreamstime.com/b/woman-standing-yoga-pose-warrior-vector-illustration-virabhadra-cartoon-female-character-flat-people-icon-93142940.jpg);
+}
+.card:hover{
+    transform: translateY(-10px);
+}
+h5 a{
+	text-decoration: none;
+    color:rgb(110, 50, 0);
+
+}
+
+.footer{
+    display: flex;
+    height: 10%;
+    align-items: center;
+    background-color: rgb(49, 18, 0);
+}
+.meet{
+    padding-left: 10px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.people{
+    
+    padding-left: 10px;
+    font-size:medium;
+    font-family:monospace;
+}
+.people a{
+    text-decoration: none;
+    color:burlywood
+}
+</style>
+<body>
+	 <div class="container">
+		 <div class = "navbar">
+			 <img src="https://i.ibb.co/KsmCXcg/Pin-Clipart-com-yoga-clipart-5292444.png" class="logo" style="width:100px">
+			<nav>
+				<ul>
+					<li><a href="http://127.0.0.1:5000/">Home</a></li>
+					<li><a href="http://127.0.0.1:5000/plank">Plank</a></li>
+					<li><a href="http://127.0.0.1:5000/tpose">Tree Pose</a></li>
+					<li><a href="http://127.0.0.1:5000/warrior">Warrior</a></li>
+				</ul>
+			</nav>
+			<img src="https://i.ibb.co/bNzs0LP/menu.png" class="menu-icon">
+		</div>
+		<div class="row">
+			<div class="col">
+				<h1> Yoga </h1>
+				<p>Yoga is a great gift to mankind which helps us keep better and maintain our health. You also develop a higher patience level when you practice yoga which also helps in keeping the negative thoughts away. You get great mental clarity and better understanding.</p>
+			</div>
+			<div class="col">
+				<div class="card card1">
+					<h5><a href="http://127.0.0.1:5000/tpose">Tree Pose</a></h5>
+					<p></p>
+				</div>
+				<div class="card card2">
+					<h5><a href="http://127.0.0.1:5000/plank">Plank</a></h5>
+					<p></p>
+				</div>
+				<div class="card card3">
+					<h5><a href="http://127.0.0.1:5000/warrior">Warrior</a></h5>
+					<p></p>
+				</div>
+				
+			</div>
+            
+		</div>
+        
+	 </div>
+     <div class="footer">
+        <p class="meet">Meet Developers</p>
+        
+    </div>
+    <div> </div>
+    <div class="footer">
+        <p class="people">Tushar Amdoskar <i class="fa fa-github"></i><a href="https://github.com/TusharAMD">Github</a><i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/in/tushar-amdoskar/">LinkedIn</a><p></p>
+    </div>
+
+
+    
+	 
+
+</body>
+</html>
