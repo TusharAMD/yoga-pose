@@ -40,7 +40,7 @@ with mp_pose.Pose(
   
   cv2.imwrite("Frame1.png",annotated_image)
 #cv2.imshow("Frame",annotated_image)
-cv2.waitKey(1)
+#cv2.waitKey(1)
 
 '''
 # For webcam input:
